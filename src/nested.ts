@@ -43,14 +43,12 @@ export function sumPublishedPoints(questions: Question[]): number {
 }
 
 export function toCSV(questions: Question[]): string {
-    const headers = "id,name,options,points,published\n";
-    const rows = questions.map((question) => {
-        const optionsString = question.options
-            ? question.options.join(",")
-            : ""; // Convert options array to string
-        return `${question.id},${question.name},${optionsString},${question.points},${question.published}\n`;
-    });
-    return headers + rows.join("");
+    const header = "id,name,options,points,published";
+    const questionsRow = questions.map(
+        (question: Question) =>
+            `${question.id},${question.name},${question.options.length},${question.points},${question.published}`
+    );
+    return `${header}\n${questionsRow.join("\n")}`;
 }
 
 export function makeAnswers(questions: Question[]): Answer[] {
@@ -84,7 +82,7 @@ export function addNewQuestion(
         type,
         body: "",
         expected: "",
-        options: type === QuestionType.Multiple_Choice_Question ? [] : null, // Adjust options handling
+        options: [],
         points: 1,
         published: false
     };
