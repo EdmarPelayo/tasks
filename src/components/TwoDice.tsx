@@ -23,8 +23,6 @@ export function d6(): number {
 }
 
 export function TwoDice(): JSX.Element {
-    // Generate initial values for left and right dice
-
     const [leftDie, setLeftDie] = useState(1);
     const [rightDie, setRightDie] = useState(4);
 

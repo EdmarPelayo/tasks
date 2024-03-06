@@ -1,20 +1,25 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 
+interface ShoveBoxButtonProps {
+    position: number;
+    setPosition: (newPosition: number) => void;
+}
+
 function ShoveBoxButton({
     position,
     setPosition
-}: {
-    position: number;
-    setPosition: (newPosition: number) => void;
-}) {
+}: ShoveBoxButtonProps): JSX.Element {
     return (
         <Button onClick={() => setPosition(4 + position)}>Shove the Box</Button>
     );
 }
 
-function MoveableBox(): JSX.Element {
-    const [position, setPosition] = useState<number>(10);
+interface MoveableBoxProps {
+    position: number;
+}
+
+function MoveableBox({ position }: MoveableBoxProps): JSX.Element {
     return (
         <div
             data-testid="moveable-box"
@@ -32,19 +37,19 @@ function MoveableBox(): JSX.Element {
 }
 
 export function ShoveBox(): JSX.Element {
-    const box = MoveableBox();
+    const [boxPosition, setBoxPosition] = useState<number>(10);
 
     return (
         <div>
             <h3>Shove Box</h3>
-            {/* <span>The box is at: {box.position}</span>
+            <span>The box is at: {boxPosition}</span>
             <div>
                 <ShoveBoxButton
-                    position={box.position}
-                    setPosition={box.setPosition}
-                ></ShoveBoxButton>
-                {box}
-            </div> */}
+                    position={boxPosition}
+                    setPosition={setBoxPosition}
+                />
+                <MoveableBox position={boxPosition} />
+            </div>
         </div>
     );
 }
