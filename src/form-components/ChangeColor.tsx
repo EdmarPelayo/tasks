@@ -31,7 +31,12 @@ export function ChangeColor(): JSX.Element {
             <h3>Change Color</h3>
             <div>
                 {colors.map((color, index) => (
-                    <label key={index}>
+                    <label
+                        key={index}
+                        style={{
+                            backgroundColor: color
+                        }}
+                    >
                         <input
                             type="radio"
                             value={color}
